@@ -15,7 +15,10 @@ function Body(props){
         <ul>
           {title}
           { props.list.map( item => {
-                return <li key={item.subId}> {item.subName}</li>
+                return <li key={item.subId}> <a href="/" onClick={ (e) => {
+                    e.preventDefault(); 
+                    props.fnBody(item.subName);
+                }}>{item.subName}</a></li>
             }) 
           }
         </ul>

@@ -16,13 +16,19 @@ function App() {
 
   ];
 
+  let numList = [1,3,5,2,4];
+
   return (
     <div className="App">
       <Header title="헤더" content="과목을 보여줍니다." fnHeader={ (x) => {
         alert(x);
       }} ></Header>
-      <Body list={list} ></Body>
-      <Footer></Footer>
+      <Body list={list} fnBody={(x) => {
+        alert(x);
+      }} ></Body>
+      <Footer list={numList} fnFooter={ (x)=>{
+        alert(x);
+      }}></Footer>
     </div>
   );
 }
