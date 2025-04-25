@@ -118,10 +118,13 @@ function Product () {
 
     return (
         <div>
+
             <button onClick={()=>{
                 setShow(!show);
-            }}>가리기</button>
+            }}>{show ? "가리기" : "보이기"}</button>
+
             { show && <ProductList /> }
+        
         </div>
     )
 }
