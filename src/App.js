@@ -1,26 +1,27 @@
 import './App.css';
+import Header from './component/Header';
+import Body from './component/Body';
+import Footer from './component/Footer';
 
-function Header(){
-  return (
-    <div>
-      <div style={{ color:"red", margin:"5px" , fontSize : "30px" }} >나는 헤더다!!!!!!!!!!!!!</div>
-    </div>
-  );
-}
 
-function Footer(){
-  return (
-    <div>
-      <div>나는 푸터다!!!!!!!!!!!!!</div>
-    </div>
-  );
-}
+
 
 function App() {
+
+  let list =[
+    {subId : "1", subName : "java"},
+    {subId : "2", subName : "html"},
+    {subId : "3", subName : "oracle"},
+    {subId : "4", subName : "react"},
+
+  ];
+
   return (
     <div className="App">
-      <Header></Header>
-      <div>Hello React</div>
+      <Header title="헤더" content="과목을 보여줍니다." fnHeader={ (x) => {
+        alert(x);
+      }} ></Header>
+      <Body list={list} ></Body>
       <Footer></Footer>
     </div>
   );
