@@ -21,6 +21,7 @@ function Menu() {
         <li><Link to="/state">State.js</Link></li>
         <li><Link to="/effect">Effect.js</Link></li>
         <li><Link to="/product">Product.js</Link></li>
+        <li><Link to="/review">Review.js</Link></li>
 
         
       </ul>
