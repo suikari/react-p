@@ -1,10 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Menu from './menu';
-import App from './App';
-import State from './State';
-import Effect from './UseEffect1';
-import Product from './ProductMain';
-import Review from './Review';
+import App from './Menu/App';
+import State from './Menu/State';
+import Effect from './Menu/UseEffect1';
+import Product from './Menu/ProductMain';
+import Review from './Menu/Review';
+import Ref from './Menu/Ref';
+import BoxSx from './Menu/BoxSx';
+import ContextEx from './Menu/ContextEx';
+import Main from './Menu/Main';
 
 function AppRouter() {
   return (
@@ -17,7 +21,13 @@ function AppRouter() {
         <Route path="/effect" element={<Effect />} />
         <Route path="/product" element={<Product />} />
         <Route path="/review" element={<Review />} />
+        <Route path="/ref" element={<Ref />} />
+        <Route path="/box" element={<BoxSx />} />
+        <Route path="/context" element={<ContextEx />} />
+        <Route path="/main" element={<Main />} />
 
+        
+        
       </Routes>
     </BrowserRouter>
   );

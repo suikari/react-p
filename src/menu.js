@@ -22,7 +22,12 @@ function Menu() {
         <li><Link to="/effect">Effect.js</Link></li>
         <li><Link to="/product">Product.js</Link></li>
         <li><Link to="/review">Review.js</Link></li>
+        <li><Link to="/ref">Ref.js</Link></li>
+        <li><Link to="/box">BoxSx.js</Link></li> 
+        <li><Link to="/context">ContextEx.js</Link></li>
+        <li><Link to="/main">main.js</Link></li>
 
+        
         
       </ul>
     </nav>
