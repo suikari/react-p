@@ -30,7 +30,7 @@ import { LoginOutlined, LoginRounded } from '@mui/icons-material';
 const drawerWidth = 240;
 
 const menuItems = [
-  { text: 'Login.js', icon: <LoginOutlined />, path: '/login' },
+  { text: 'Login.js', icon: <LoginOutlined />, path: '/box' },
   { text: 'App.js', icon: <AppsIcon />, path: '/app' },
   { text: 'State.js', icon: <ArticleIcon />, path: '/state' },
   { text: 'Effect.js', icon: <SendIcon />, path: '/effect' },

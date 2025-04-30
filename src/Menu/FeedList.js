@@ -1,11 +1,12 @@
 
 
 import React, { useEffect, useState } from "react";
-import { Container, Typography, Card, CardContent, Divider , Button } from "@mui/material";
+import { Container, Typography, Card, CardContent, Divider , Button , Stack } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-
+import { jwtDecode } from "jwt-decode";
 
 function FeedList() {
+  const [isAll, setAll] = useState(true);
 
   const navigate = useNavigate(); // 페이지 이동을 위한 함수 리턴
 
@@ -24,12 +25,23 @@ function FeedList() {
     },
   ]);
 
+  let token;
+  let dToken;
 
 
-  let fnList =  () => {
-    fetch('http://localhost:3003/feed')
+  let fnList = (userId) => {
+    
+    let url;
+
+    if (userId != '' ) {
+      url = "http://localhost:3003/feed?userId="+ userId
+    } else {
+      url = "http://localhost:3003/feed";
+    }
+
+    fetch(url)
         .then((res)=> res.json())
-        .then((data) => {
+        .then(data => {
             console.log(data);
             if (data.message == 'success' ) {
                 //alert(data.result+'님 환영합니다.');
@@ -43,13 +55,18 @@ function FeedList() {
         });
     }
     
+    token = localStorage.getItem("token"); // 로컬 스토리지에서 토큰 꺼내기
+    dToken = jwtDecode(token) // 디코딩
 
    useEffect (()=>{
 
-
-        fnList();
+    if (isAll) {
+      fnList('');
+    } else {
+      fnList(dToken.userId);
+    }
    }
-   ,[])
+   ,[isAll])
     
 
    let fnDelete = (id) => {
@@ -69,8 +86,17 @@ function FeedList() {
         .then((res)=> res.json())
         .then((data) => {
             console.log(data);
-            alert("삭제 완료!");
-            fnList();
+
+            if(!data.isLogin && data.isLogin ){
+              alert("인증 세션 만료 다시 로그인 후 시도해 주세요.");
+              return;
+            }
+
+            if (isAll) {
+              fnList('');
+            } else {
+              fnList(dToken.userId);
+            }
         })
         .catch( err => {
         });
@@ -80,20 +106,37 @@ function FeedList() {
     
     <Container maxWidth="sm">
       <Typography variant="h4" gutterBottom>피드 목록</Typography>
+      <Button onClick={()=>{
+        setAll(!isAll);
+
+        if (isAll) {
+          fnList('');
+        } else {
+          fnList(dToken.userId);
+        }
+      }}> { isAll ? "내 피드만" : "전체보기" }</Button>
       <Divider sx={{ mb: 2 }} />
       {feeds.map(feed => (
         <Card key={feed.id} sx={{ mb: 2 }}>
           <CardContent>
             <Typography variant="h6">{feed.userId}</Typography>
-            <Typography variant="body1">{feed.content}</Typography>
+            <Typography variant="body1">{feed.content}
+            { feed.images ? feed.images.map((item) => {
+               return <img key={item.imgNo} width={150} height={150}  src={'http://localhost:3003/' + item.imgPath}></img>
+            }) : null }
+            </Typography>
             <Typography variant="caption" color="text.secondary">
               {new Date(feed.cdatetime).toLocaleString()}
             </Typography>
 
+            { feed.userId == dToken.userId ?
+            <Stack spacing={2} direction="row">
             <Button variant="outlined" onClick={()=>{
                 navigate("/feedadd?id="+feed.id);
             }}>수정</Button>
             <Button variant="outlined" onClick={()=>{fnDelete(feed.id)}}>삭제</Button>
+            </Stack> : null
+            }
           </CardContent>
         </Card>
       ))}

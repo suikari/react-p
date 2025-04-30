@@ -18,24 +18,31 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import { useNavigate    } from 'react-router-dom';
 
 
 
 function LoginPage() {
 
 
+
+  const navigate = useNavigate(); // 페이지 이동을 위한 함수 리턴
+  
+
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (message) => {
+    userId = message;
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    navigate("/feedlist");     
   };
 
     let [info,setInfo] = useState({userId : "", pwd : "" });
-
+    let userId = '';
     let fnLogin =  () => {
       fetch('http://localhost:3003/login', {
           method : "POST",
@@ -51,7 +58,11 @@ function LoginPage() {
               if (data.message == 'success' ) {
                   //alert(data.result+'님 환영합니다.');
                   //location.href = "../day3/product-list.html";
-                  handleClickOpen();
+                  
+
+                  handleClickOpen(data.result);
+                  localStorage.setItem("token", data.token);
+
               } else {
                   alert('아이디 또는 패스워드를 확인하세요.');
               }
@@ -77,7 +88,7 @@ function LoginPage() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            로그인 환영 .냉무.
+            {userId} 로그인 환영합니다
           </DialogContentText>
         </DialogContent>
         <DialogActions>
