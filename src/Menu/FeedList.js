@@ -55,7 +55,7 @@ function FeedList() {
         });
     }
     
-    token = localStorage.getItem("token"); // 로컬 스토리지에서 토큰 꺼내기
+    token = localStorage.getItem("token") ; // 로컬 스토리지에서 토큰 꺼내기
     dToken = jwtDecode(token) // 디코딩
 
    useEffect (()=>{
@@ -115,6 +115,10 @@ function FeedList() {
           fnList(dToken.userId);
         }
       }}> { isAll ? "내 피드만" : "전체보기" }</Button>
+
+      <Button onClick={()=>{
+        navigate("/feedadd");
+      }}>피드 등록</Button>
       <Divider sx={{ mb: 2 }} />
       {feeds.map(feed => (
         <Card key={feed.id} sx={{ mb: 2 }}>
@@ -140,9 +144,7 @@ function FeedList() {
           </CardContent>
         </Card>
       ))}
-      <button onClick={()=>{
-        navigate("/feedadd");
-      }}>피드 등록</button>
+
 
     </Container>
   )

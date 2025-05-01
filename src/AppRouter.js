@@ -12,6 +12,9 @@ import ReducerEx from './Menu/ReducerEx';
 import ReducerEx2 from './Menu/ReducerEx2';
 import FeedList from './Menu/FeedList';
 import FeedAdd from './Menu/FeedAdd';
+import Memo from './Menu/Memo'
+import UserIdEx from './Menu/UserIdEx';
+
 
 // AppRouter.js
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
@@ -42,6 +45,8 @@ const menuItems = [
   { text: 'ReducerEx.js', icon: <DashboardIcon />, path: '/reducer' },
   { text: 'ReducerEx2.js', icon: <DashboardIcon />, path: '/reducer2' },  
   { text: 'FeedList.js', icon: <DashboardIcon />, path: '/feedlist' },  
+  { text: 'Memo.js', icon: <DashboardIcon />, path: '/memo' },  
+  { text: 'userIdEx.js', icon: <DashboardIcon />, path: '/userIdEx' },  
 
   
 ];
@@ -116,6 +121,8 @@ function AppRouter() {
         <Route path="/reducer2" element={<ReducerEx2 />} />
         <Route path="/feedlist" element={<FeedList />} />
         <Route path="/feedadd" element={<FeedAdd />} />
+        <Route path="/memo" element={<Memo />} />
+        <Route path="/userIdEx" element={<UserIdEx />} />
 
         
         
